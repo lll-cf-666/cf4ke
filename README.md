@@ -1,122 +1,103 @@
-# cf4ke · 四门专业课统一大纲
+# cf4ke · 四门课 · 一个项目
 
-**一句话定位**：以期末考试（2027-01-04 ~ 01-08）为锚，四门课不是四件事，是一个项目的四层——信息采集管数据从哪来，数据库管数据存哪，前端管数据怎么给人看，交换路由拿学分顺便懂底层。所有直链指向 GitHub，当字典查，不当书刷。
-
----
-
-## 0 · 时间底座（校历 + 作息钉死）
-
-- 今天 2026-11-26 = 第 13 周周四；**能上新课的窗口到 12-27（第 17 周末），共 5 周**
-- 第 18 周（12/28–1/3）复习周 + 元旦假；**期末 1 月 4–8 日；1 月 9 日放寒假**
-- 作息：1–2 节 8:00–9:40 / 3–4 节 9:55–11:35 / 5–6 节 14:30–16:10 / 7–8 节 16:20–18:00 / 9–10 节 19:00–20:40
-- 周二晚自习被信息采集晚课占用；**周一/三/四晚自习 19:00–20:40 全空**；周三全天空课；周五 16:10 后自由
+**期末 2027-01-04 ~ 01-08。四门课不是四件事，是一个项目的四层：信息采集管数据从哪来，数据库管存哪，前端管怎么给人看，交换路由拿学分顺便懂底层。**
 
 ---
 
-## 1 · 信息采集技术 · 魏邵杰 · 3 次/周（周一 1–2 / 周四 5–6 / 周二晚 9–10）
+## 0 · 时间底座
 
-**定位**：项目数据层 + Python 主线。教 Python 基础、requests、BeautifulSoup、翻页、存 CSV。
-
-**期末必拿**：requests 用法、bs4 找元素、循环翻页；易丢分：`res.encoding` 编码、选择器写错。
-
-**机上任务（每次课 3 件）**：①当堂例子跑通改 3 处参数 ②每个请求套 `try/except`+重试+sleep ③结果存 CSV/落库。
-
-**GitHub 直链**
-
-| 仓库 | 拿什么 | 何时 |
-|---|---|---|
-| https://github.com/jackzhenguo/python-small-examples | 中文小例子，每天 5 个跑懂 | 现在起每晚 |
-| https://github.com/wistbean/learn_python3_spider | 只看 requests / BeautifulSoup / 反爬基础三章 | 现在起，配课上进度 |
-| https://github.com/PyMySQL/PyMySQL | Python 写 MySQL 的驱动，M2 必备 | 第 14 周起 |
-| https://github.com/luyishisi/Anti-Anti-Spider | 反爬手段合集，被封锁才查 | 寒假后按需 |
-
-**推进**：M1（爬 10+ 所院校招生数据存 CSV）→ 第 15 周末交；M2（落 MySQL 不重复）→ 第 16 周末交。
+- 今天 2026-11-26 = 第 13 周周四；**新课窗口到 12-27，共 5 周**
+- 第 18 周（12/28–1/3）复习周 + 元旦；**期末 1/4–1/8，1/9 放寒假**
+- 空余：**周一/三/四晚 19:00–20:40 全空**；周三全天空课；周五 16:10 后自由
 
 ---
 
-## 2 · 前端设计与开发 · 陈智敏 · 3 次/周（周二 1–2 / 周四 1–2 / 周一 3–4）
+## 1 · 信息采集 · 魏邵杰 · 3 次/周（周一 1–2 / 周四 5–6 / 周二晚）
 
-**定位**：项目展示层 + JS 副线。教 HTML/CSS/JS 语法/DOM。**课件缺口：闭包 0 处、DOM 仅 8 处、事件仅 3 处——课上能过考试，做不出能点的页面，缺口自己补。**
+- **定位**：数据层 + Python 主线（requests / BeautifulSoup / 翻页 / 存 CSV）
+- **期末必拿**：requests、bs4 找元素、循环翻页；易丢分：`res.encoding`、选择器写错
+- **机上任务**：①当堂例子跑通改 3 处参数 ②每个请求套 `try/except`+重试+sleep ③结果存 CSV/落库
+- **推进**：M1 第 15 周末交（12-13）→ M2 第 16 周末交（12-20）
 
-**期末必拿**：JS 基础语法、流程控制、函数、数组对象（课件最厚）；操作题考 DOM/事件。
-
-**机上任务**：①当堂手敲 + Live Server 预览 ②F12 控制台改元素文字颜色 ③`querySelector` + `addEventListener` 各写 3 遍 + 表单取值校验。
-
-**GitHub 直链**
-
-| 仓库 | 拿什么 | 何时 |
-|---|---|---|
-| https://github.com/javascript-tutorial/zh.javascript.info | 现代 JS 教程官方中文，「浏览器：文档/事件」两章补缺口 | 现在起每周四晚 |
-| https://github.com/lydiahallie/javascript-questions | JS 习题（README-zh_CN.md 中文版），错题记 stuck.md | 每周 5 题 |
-| https://github.com/mqyqingfeng/Blog | 冴羽深度系列：this/闭包/原型/call·apply 四篇 | 周日精读 |
-| https://github.com/30-seconds/30-seconds-of-code | 代码片段速查 | 写页面时查 |
-
-**推进**：M4（fetch 接口 → 渲染表格）排寒假第 3–4 周；期末考完立刻无缝接。
+| 仓库 | 拿什么 |
+|---|---|
+| [python-small-examples](https://github.com/jackzhenguo/python-small-examples) | 中文小例子，每晚 5 个 |
+| [learn_python3_spider](https://github.com/wistbean/learn_python3_spider) | 系列06 当当 / 系列07 豆瓣 / 24 CSV / 25 MySQL |
+| [PyMySQL](https://github.com/PyMySQL/PyMySQL) | Python ↔ MySQL，M2 必备 |
+| [Anti-Anti-Spider](https://github.com/luyishisi/Anti-Anti-Spider) | 被封锁才查 |
 
 ---
 
-## 3 · 数据库技术与应用 · 梁智锋 · 2 次/周（周二 3–4 / 周四 7–8）
+## 2 · 前端 · 陈智敏 · 3 次/周（周二 1–2 / 周四 1–2 / 周一 3–4）
 
-**定位**：项目存储层。SQL 是面试 100% 会问的硬门槛，这门课白送 30+ 小时。
+- **定位**：展示层 + JS 副线。**课件缺口：闭包 0 处、DOM 仅 8 处、事件仅 3 处——课上能过考试，做不出能点的页面，缺口自己补。**
+- **期末必拿**：JS 语法 / 流程控制 / 函数 / 数组对象；操作题考 DOM/事件
+- **机上任务**：①手敲 + Live Server 预览 ②F12 改元素文字颜色 ③`querySelector`+`addEventListener` 各 3 遍 + 表单校验
+- **推进**：M4 排寒假第 3–4 周（02-07），期末考完无缝接
 
-**期末必拿**：增删改查、WHERE、GROUP BY、多表 JOIN；易丢分：外键约束、NULL 比较、聚合+GROUP BY 混用。
-
-**机上任务**：①当堂 SQL **手敲**跑通（禁复制粘贴）②对当堂表写 WHERE / ORDER BY+LIMIT / GROUP BY 各一条 ③pymysql 每次课连一条 ④CSV 导表跑两遍确认不重复。
-
-**GitHub 直链**
-
-| 仓库 | 拿什么 | 何时 |
-|---|---|---|
-| https://github.com/datacharmer/test_db | 官方 employees 示例库（10 万+ 行真数据），练 JOIN/GROUP BY | 第 14 周导入 |
-| https://github.com/PyMySQL/PyMySQL | Python ↔ MySQL 那一环 | 第 14 周跑通 |
-| https://github.com/CyC2018/CS-Notes | notes/MySQL.md 面试向笔记 | 寒假起 |
-
-**推进**：M2 用这门课的知识落库（建表 SQL 在《课表对齐版》第三章， schools + majors 两张表直接抄）。
+| 仓库 | 拿什么 |
+|---|---|
+| [zh.javascript.info](https://zh.javascript.info) | 现代教程中文，浏览器文档/事件两章补缺口（仓库只查目录，阅读走网站） |
+| [javascript-questions](https://github.com/lydiahallie/javascript-questions) | 每周 5 题，错题记 stuck.md |
+| [mqyqingfeng/Blog](https://github.com/mqyqingfeng/Blog) | 周日精读：this / 闭包 / 原型 |
+| [30-seconds-of-code](https://github.com/30-seconds/30-seconds-of-code) | 片段速查，当字典 |
 
 ---
 
-## 4 · 交换路由技术 · 李纪君 · 1 次/周（周一 7–8）
+## 3 · 数据库 · 梁智锋 · 2 次/周（周二 3–4 / 周四 7–8）
 
-**定位**：辅课。态度 = 拿学分 + 混脸熟，不追加投入。网络底层知识对爬虫（HTTP/DNS）有隐性帮助。
+- **定位**：存储层。SQL 面试 100% 会问，这门课白送 30+ 小时
+- **期末必拿**：增删改查 / WHERE / GROUP BY / JOIN；易丢分：外键、NULL 比较、聚合混用
+- **机上任务**：①SQL **手敲**（禁复制粘贴）②对当堂表写 WHERE / ORDER BY+LIMIT / GROUP BY ③pymysql 每课连一条 ④CSV 导表跑两遍不重复
+- **推进**：M2 用这门课落库（建表 SQL 抄《课表对齐版》第三章 schools + majors）
 
-**机上任务**：①Packet Tracer 当堂拓扑搭一遍 ②`ping`/`ipconfig`/`tracert` 验证连通 ③当堂命令记笔记。
+| 仓库 | 拿什么 |
+|---|---|
+| [test_db](https://github.com/datacharmer/test_db) | employees 示例库 30 万行，练 JOIN/GROUP BY，第 14 周导入 |
+| [PyMySQL](https://github.com/PyMySQL/PyMySQL) | 第 14 周跑通 |
+| [CS-Notes](https://github.com/CyC2018/CS-Notes) | `notes/MySQL.md` 面试向，寒假起 |
 
-**GitHub 直链**
+---
 
-| 仓库 | 拿什么 | 何时 |
-|---|---|---|
-| https://github.com/GNS3/gns3-gui | GNS3 模拟器（比 Packet Tracer 真实，想多学再装） | 按需 |
+## 4 · 交换路由 · 李纪君 · 1 次/周（周一 7–8）
+
+- **定位**：辅课，拿学分 + 混脸熟，不追加投入
+- **机上任务**：①Packet Tracer 当堂拓扑搭一遍 ②`ping`/`ipconfig`/`tracert` 验证 ③命令记笔记
+
+| 仓库 | 拿什么 |
+|---|---|
+| [gns3-gui](https://github.com/GNS3/gns3-gui) | 想多学再装的模拟器，按需 |
 
 ---
 
 ## 5 · 一周时间盘（第 13–17 周）
 
-| 时段 | 给谁 |
+| 时段 | 干什么 |
 |---|---|
 | 机房 9 段课 | 当堂消化，3 任务走完不摸鱼 |
-| 周一晚 19:00–20:40 | 信息采集：python-small-examples 5 例 |
-| 周三全天空课 | **项目主战场**：M1/M2 + learn_python3_spider 配套章节 |
-| 周四晚 19:00–20:40 | 前端：zh.javascript.info 补 DOM/事件 + javascript-questions 5 题 |
-| 周五 16:10 后 | 数据库：test_db 导入 + JOIN + pymysql 全流程 |
-| 周六 4–5h | FastAPI 提前起步（M3 接口雏形） |
-| 周日 4–5h | 复盘 + mqyqingfeng/Blog 深度文 |
+| 周一晚 | python-small-examples 5 例 |
+| 周三全天空课 | **项目主战场**：M1/M2 + 爬虫教程配套章节 |
+| 周四晚 | zh.javascript.info 补 DOM/事件 + 刷题 5 道 |
+| 周五 16:10 后 | test_db 导入 + JOIN + pymysql 全流程 |
+| 周六 4–5h | FastAPI 提前起步（M3 雏形） |
+| 周日 4–5h | 复盘 + Blog 深度文 |
 
-第 16–17 周：项目收尾进期末预热；第 18 周：复习周+元旦，课件例题全手敲、自出 10 题/门闭卷做。
+第 16–17 周收尾进期末预热；第 18 周复习：课件例题全手敲、自出 10 题/门闭卷做。
 
 ---
 
-## 6 · 里程碑总表
+## 6 · 里程碑
 
-| 里程碑 | 交给谁 | 截止 |
+| 里程碑 | 交谁 | 截止 |
 |---|---|---|
-| M1 抓：爬 10+ 所院校存 CSV | 信息采集 | 12-13（第 15 周末） |
-| M2 存：MySQL 建表写库不重复 | 数据库 | 12-20（第 16 周末） |
-| 期末四门全过 | 学校 | 2027-01-04 ~ 08 |
+| M1 抓：爬 10+ 院校存 CSV | 信息采集 | 12-13 |
+| M2 存：MySQL 落库不重复 | 数据库 | 12-20 |
+| 期末四门全过 | 学校 | 01-04 ~ 08 |
 | M3 接口：FastAPI 三 GET | 自学 | 2027-01-24 |
 | M4 展示：fetch 渲染表格 | 前端 | 2027-02-07 |
 | M5 串：一条命令跑通全链 | 全部 | 2027-02-21 |
 
-M3 的接口定义：`GET /api/schools`（列表+筛选）、`GET /api/schools/{id}`（详情）、`GET /api/stats`（按城市统计），FastAPI 中文文档 https://fastapi.tiangolo.com/zh/ ，仓库 https://github.com/tiangolo/fastapi
+M3 接口：`GET /api/schools`（列表+筛选）、`GET /api/schools/{id}`（详情）、`GET /api/stats`（按城市统计）。文档 [fastapi.tiangolo.com/zh](https://fastapi.tiangolo.com/zh/)。
 
 ---
 
@@ -124,26 +105,21 @@ M3 的接口定义：`GET /api/schools`（列表+筛选）、`GET /api/schools/{
 
 | 内容 | 直链 |
 |---|---|
-| M3/M4/M5 冲刺 | tiangolo/fastapi |
-| RAG / AI 方向铺垫 | https://github.com/langchain-ai/rag-from-scratch · https://github.com/infiniflow/ragflow |
-| 反爬进阶 | luyishisi/Anti-Anti-Spider（被封锁才看） |
-| 数据库面试 | CyC2018/CS-Notes |
+| M3/M4/M5 冲刺 | [tiangolo/fastapi](https://github.com/tiangolo/fastapi) |
+| RAG / AI 铺垫 | [rag-from-scratch](https://github.com/langchain-ai/rag-from-scratch) · [ragflow](https://github.com/infiniflow/ragflow) |
+| 反爬进阶 | [Anti-Anti-Spider](https://github.com/luyishisi/Anti-Anti-Spider)（被封锁才看） |
+| 数据库面试 | [CS-Notes](https://github.com/CyC2018/CS-Notes) |
 
 ---
 
-## 8 · 本文件夹索引
-
-**不知道看哪个？按这个顺序：**
+## 8 · 文件索引（不知道看哪个？按这个顺序）
 
 | 顺序 | 文件 | 什么时候看 |
 |---|---|---|
-| 1️⃣ | **元旦前课表-逐周逐课.md** | **每天早上先开这个**——今天是什么周、哪节课、干什么，全在一张表里 |
-| 2️⃣ | 第0课-信息采集-第一次抓网页.md / 第0课-前端-第一次让网页动起来.md | 课表让你跑第 0 课时，跟着一步步敲 |
-| 3️⃣ | 课表对齐版-三门课怎么拧成一条线.md | 想知道"为什么这么安排"再翻 |
-| 4️⃣ | 机房与空余-直链学习地图.md | 找 GitHub 学习仓库直链时查 |
-| 5️⃣ | 网站方案-机房取材料.md / 作业提交与报错登记.md | 忘了怎么交作业/怎么取材料时查 |
-| 底 | README.md（本文件） | 总目录 + 四门课大纲 |
+| 1️⃣ | **元旦前课表-逐周逐课.md** | **每天早上先开**——今天哪节课、干什么，全在一张表 |
+| 2️⃣ | 两份第0课 | 课表让你跑第 0 课时跟着敲 |
+| 3️⃣ | 课表对齐版 | 想知道"为什么这么排"再翻 |
+| 4️⃣ | 直链学习地图 | 空余时间找 GitHub 直链时查 |
+| 5️⃣ | 网站方案 / 交作业登记 | 忘了怎么交作业/取材料时查 |
 
-其余文件：上传到网站.bat（家里电脑更新材料用）、每日任务/（Py/JS 题包，D:\study\双语言\每日任务）
-
-两条铁律：**机房课上不碰别的**；**GitHub 当字典不当书——打开仓库前先想清楚要拿什么**。
+**两条铁律：机房课上不碰别的；GitHub 当字典不当书。**
