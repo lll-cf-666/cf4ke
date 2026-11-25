@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>cf4ke · 学习手册</title>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  :root{--bg:#f6f8fa;--card:#fff;--line:#d0d7de;--txt:#1f2328;--dim:#656d76;--acc:#0969da}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Segoe UI","Microsoft YaHei",system-ui,sans-serif;background:var(--bg);color:var(--txt)}
+  header{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:12px;padding:10px 16px;background:var(--card);border-bottom:1px solid var(--line)}
+  header strong{font-size:16px}
+  header a{margin-left:auto;color:var(--acc);text-decoration:none;font-size:14px}
+  #menuBtn{display:none;border:1px solid var(--line);background:var(--bg);border-radius:6px;padding:4px 10px;font-size:15px;cursor:pointer}
+  #wrap{display:flex;max-width:1200px;margin:0 auto}
+  nav{width:250px;flex-shrink:0;padding:16px 12px;border-right:1px solid var(--line);min-height:calc(100vh - 53px)}
+  nav a{display:block;padding:8px 10px;margin:2px 0;border-radius:6px;color:var(--txt);text-decoration:none;font-size:14px;line-height:1.4}
+  nav a:hover{background:#eaeef2}
+  nav a.on{background:#ddf4ff;color:var(--acc);font-weight:600}
+  main{flex:1;min-width:0;padding:24px 28px 80px}
+  main .md{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:28px 32px;max-width:880px}
+  .md h1,.md h2{border-bottom:1px solid var(--line);padding-bottom:8px}
+  .md h1{font-size:26px}.md h2{font-size:21px}.md h3{font-size:17px}
+  .md code{background:#f0f1f3;border-radius:4px;padding:2px 5px;font-family:Consolas,monospace;font-size:.9em}
+  .md pre{background:#161b22;color:#e6edf3;padding:14px;border-radius:8px;overflow-x:auto}
+  .md pre code{background:none;color:inherit;padding:0}
+  .md table{border-collapse:collapse;width:100%;margin:12px 0;font-size:14px}
+  .md th,.md td{border:1px solid var(--line);padding:6px 10px;text-align:left}
+  .md th{background:#f0f1f3}
+  .md blockquote{border-left:4px solid var(--acc);margin:10px 0;padding:4px 14px;color:var(--dim);background:#f6f8fa}
+  .md a{color:var(--acc)}
+  .md img{max-width:100%}
+  #tip{margin:0 0 14px;color:var(--dim);font-size:13px}
+  @media(max-width:760px){
+    #menuBtn{display:inline-block}
+    nav{position:fixed;left:0;top:53px;bottom:0;background:var(--card);transform:translateX(-100%);transition:.2s;z-index:9;box-shadow:2px 0 8px rgba(0,0,0,.1)}
+    nav.open{transform:none}
+    main{padding:16px 12px 60px}
+    .md{padding:18px 16px}
+  }
+</style>
+</head>
+<body>
+<header>
+  <button id="menuBtn">☰ 目录</button>
+  <strong>cf4ke · 学习手册</strong>
+  <a href="https://github.com/lll-cf-666/cf4ke" target="_blank">GitHub 仓库 ↗</a>
+</header>
+<div id="wrap">
+  <nav id="side"></nav>
+  <main>
+    <p id="tip">左侧点文件切换 · 页内链接新标签打开 · 手机点 ☰ 出目录</p>
+    <div class="md" id="content"><p>加载中…</p></div>
+  </main>
+</div>
+<script>
+const FILES = [
+  {f:"README.md",                              t:"🏠 总目录（从这里开始）"},
+  {f:"元旦前课表-逐周逐课.md",                 t:"📅 元旦前课表（每天先开这个）"},
+  {f:"第0课-信息采集-第一次抓网页.md",         t:"🐍 第0课 · 信息采集"},
+  {f:"第0课-前端-第一次让网页动起来.md",       t:"🌐 第0课 · 前端"},
+  {f:"课表对齐版-三门课怎么拧成一条线.md",     t:"🧩 课表对齐版（为什么这么排）"},
+  {f:"机房与空余-直链学习地图.md",             t:"🔗 直链学习地图（空余时间干啥）"},
+  {f:"作业提交与报错登记.md",                  t:"📮 交作业 / 报错登记"},
+  {f:"网站方案-机房取材料.md",                 t:"📡 网站方案（三层取材料）"}
+];
+const side = document.getElementById("side");
+const content = document.getElementById("content");
+const menuBtn = document.getElementById("menuBtn");
+FILES.forEach((x,i)=>{
+  const a = document.createElement("a");
+  a.textContent = x.t;
+  a.href = "?file=" + encodeURIComponent(x.f);
+  a.onclick = e => { e.preventDefault(); go(x.f); closeMenu(); };
+  a.dataset.f = x.f;
+  side.appendChild(a);
+});
+menuBtn.onclick = () => side.classList.toggle("open");
+function closeMenu(){ side.classList.remove("open"); }
+function esc(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+function render(md){
+  if (window.marked && marked.parse) {
+    content.innerHTML = marked.parse(md);
+  } else {
+    content.innerHTML = "<p>⚠️ 渲染库加载失败（机房网络可能挡了 CDN），下面是原文：</p><pre style='white-space:pre-wrap'>" + esc(md) + "</pre>";
+  }
+  content.querySelectorAll('a[href^="http"]').forEach(a=>a.target="_blank");
+  window.scrollTo(0,0);
+}
+async function go(file){
+  history.replaceState(null,"","?file=" + encodeURIComponent(file));
+  side.querySelectorAll("a").forEach(a=>a.classList.toggle("on", a.dataset.f===file));
+  content.innerHTML = "<p>加载中…</p>";
+  try{
+    const res = await fetch(encodeURI(file), {cache:"no-cache"});
+    if(!res.ok) throw new Error("HTTP " + res.status);
+    render(await res.text());
+  }catch(err){
+    content.innerHTML = "<p>❌ 加载失败：" + esc(String(err)) +
+      "<br>开 <a target='_blank' href='https://github.com/lll-cf-666/cf4ke/blob/main/" + encodeURIComponent(file) + "'>GitHub 上的原文</a> 看，或者按第0课的流程去 Issues 报。</p>";
+  }
+}
+const q = new URLSearchParams(location.search).get("file");
+const first = FILES.find(x=>x.f===q) ? q : FILES[0].f;
+go(first);
+</script>
+</body>
+</html>
