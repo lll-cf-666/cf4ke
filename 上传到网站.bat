@@ -16,6 +16,6 @@ echo [3/3] push to GitHub...
 git push
 
 echo.
-echo Done. Website: https://YOUR-USERNAME.github.io/cf4ke/
-echo Repo:     https://github.com/YOUR-USERNAME/cf4ke
+echo Done. Website: https://lll-cf-666.github.io/cf4ke/
+echo Repo:     https://github.com/lll-cf-666/cf4ke
 pause
