@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>cf4ke · 学习手册</title>
+<title>cf4ke · 学习台</title>
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <style>
-  :root{--bg:#f6f8fa;--card:#fff;--line:#d0d7de;--txt:#1f2328;--dim:#656d76;--acc:#0969da}
+  :root{--bg:#f6f8fa;--card:#fff;--line:#d0d7de;--txt:#1f2328;--dim:#656d76;--acc:#0969da;--ok:#1a7f37;--warn:#9a6700;--dead:#cf222e}
   *{box-sizing:border-box}
   body{margin:0;font-family:"Segoe UI","Microsoft YaHei",system-ui,sans-serif;background:var(--bg);color:var(--txt)}
   header{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:12px;padding:10px 16px;background:var(--card);border-bottom:1px solid var(--line)}
@@ -14,10 +14,15 @@
   header a{margin-left:auto;color:var(--acc);text-decoration:none;font-size:14px}
   #menuBtn{display:none;border:1px solid var(--line);background:var(--bg);border-radius:6px;padding:4px 10px;font-size:15px;cursor:pointer}
   #wrap{display:flex;max-width:1200px;margin:0 auto}
-  nav{width:250px;flex-shrink:0;padding:16px 12px;border-right:1px solid var(--line);min-height:calc(100vh - 53px)}
-  nav a{display:block;padding:8px 10px;margin:2px 0;border-radius:6px;color:var(--txt);text-decoration:none;font-size:14px;line-height:1.4}
+  nav{width:250px;flex-shrink:0;padding:12px 12px 40px;border-right:1px solid var(--line);min-height:calc(100vh - 53px)}
+  nav .grp{margin:14px 0 4px;padding:0 10px;font-size:12px;color:var(--dim);letter-spacing:1px}
+  nav a{display:block;padding:7px 10px;margin:2px 0;border-radius:6px;color:var(--txt);text-decoration:none;font-size:14px;line-height:1.4}
   nav a:hover{background:#eaeef2}
   nav a.on{background:#ddf4ff;color:var(--acc);font-weight:600}
+  nav a.st::after{content:attr(data-st);float:right;font-size:11px;padding:1px 7px;border-radius:10px;background:#eaeef2;color:var(--dim)}
+  nav a.st[data-st="今日"]::after{background:#ddf4ff;color:var(--acc);font-weight:700}
+  nav a.st[data-st="要交"]::after{background:#fff8c5;color:var(--warn)}
+  nav a.st[data-st="M1"]::after,nav a.st[data-st="M2"]::after,nav a.st[data-st="M3"]::after{background:#dafbe1;color:var(--ok);font-weight:700}
   main{flex:1;min-width:0;padding:24px 28px 80px}
   main .md{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:28px 32px;max-width:880px}
   .md h1,.md h2{border-bottom:1px solid var(--line);padding-bottom:8px}
@@ -31,65 +36,132 @@
   .md blockquote{border-left:4px solid var(--acc);margin:10px 0;padding:4px 14px;color:var(--dim);background:#f6f8fa}
   .md a{color:var(--acc)}
   .md img{max-width:100%}
+  .md input[type=checkbox]{transform:scale(1.2);margin-right:6px;accent-color:var(--acc)}
+  #home{max-width:880px}
+  #home .row{display:flex;gap:12px;flex-wrap:wrap}
+  #home .card{flex:1 1 240px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px;cursor:pointer;transition:.15s}
+  #home .card:hover{border-color:var(--acc);box-shadow:0 2px 10px rgba(9,105,218,.12)}
+  #home .card h3{margin:0 0 6px;font-size:16px}
+  #home .card p{margin:0;color:var(--dim);font-size:13px;line-height:1.5}
+  #home .big{background:linear-gradient(135deg,#ddf4ff,#fff8c5);border-color:#54aeff}
   #tip{margin:0 0 14px;color:var(--dim);font-size:13px}
+  #topbar{display:none;gap:8px;align-items:center;margin-bottom:12px;font-size:13px}
+  #topbar .cb{border:1px solid var(--line);background:var(--card);border-radius:6px;padding:6px 12px;cursor:pointer;color:var(--txt);text-decoration:none}
+  #topbar .cb:hover{border-color:var(--acc)}
   @media(max-width:760px){
     #menuBtn{display:inline-block}
-    nav{position:fixed;left:0;top:53px;bottom:0;background:var(--card);transform:translateX(-100%);transition:.2s;z-index:9;box-shadow:2px 0 8px rgba(0,0,0,.1)}
+    nav{position:fixed;left:0;top:53px;bottom:0;background:var(--card);transform:translateX(-100%);transition:.2s;z-index:9;box-shadow:2px 0 8px rgba(0,0,0,.1);overflow-y:auto}
     nav.open{transform:none}
     main{padding:16px 12px 60px}
     .md{padding:18px 16px}
+    #topbar{display:flex}
+    #home .card{flex:1 1 100%}
   }
 </style>
 </head>
 <body>
 <header>
   <button id="menuBtn">☰ 目录</button>
-  <strong>cf4ke · 学习手册</strong>
+  <strong>cf4ke · 学习台</strong>
   <a href="https://github.com/lll-cf-666/cf4ke" target="_blank">GitHub 仓库 ↗</a>
 </header>
 <div id="wrap">
   <nav id="side"></nav>
   <main>
-    <p id="tip">左侧点文件切换 · 页内链接新标签打开 · 手机点 ☰ 出目录</p>
+    <div id="topbar">
+      <a class="cb" href="#" id="prevB">← 上一课</a>
+      <a class="cb" href="#" id="nextB">下一课 →</a>
+      <a class="cb" target="_blank" href="https://github.com/lll-cf-666/cf4ke/issues/new?template=issue_template.md">🆘 报错</a>
+    </div>
+    <p id="tip">左侧按「今天学什么 → 课程 → 工具」排 · 手机点 ☰ 出目录 · 顶部按钮切上一课/下一课</p>
     <div class="md" id="content"><p>加载中…</p></div>
+    <div id="home" style="display:none"></div>
   </main>
 </div>
 <script>
+/* 文件分组：label=null 表示不分组直接放 */
 const FILES = [
-  {f:"README.md",                              t:"🏠 总目录（从这里开始）"},
-  {f:"元旦前课表-逐周逐课.md",                 t:"📅 元旦前课表（每天先开这个）"},
-  {f:"课程/第1课-爬真书站存CSV.md",            t:"📘 第1课 · 爬真书站存CSV"},
-  {f:"课程/第2课-翻页与DOM回显.md",            t:"📘 第2课 · 翻页与DOM回显"},
-  {f:"课程/第3课-三色按钮与fetch.md",          t:"📘 第3课 · 三色按钮与fetch"},
-  {f:"课程/第4课-SQL强化与项目建表.md",        t:"📘 第4课 · SQL强化与项目建表"},
-  {f:"课程/第5课-爬虫三件套与M1.md",           t:"📘 第5课 · 爬虫三件套（M1交）"},
-  {f:"课程/第6课-JS渲染表格.md",               t:"📘 第6课 · JS渲染表格"},
-  {f:"课程/第7课-落库与M2.md",                 t:"📘 第7课 · 落库（M2交）"},
-  {f:"课程/第8课-统计与真表格.md",             t:"📘 第8课 · 统计与真表格"},
-  {f:"课程/第9课-FastAPI三接口.md",            t:"📘 第9课 · FastAPI三接口（M3交）"},
-  {f:"课程/第10课-复习周与期末.md",            t:"📘 第10课 · 复习周与期末"},
-  {f:"第0课-信息采集-第一次抓网页.md",         t:"🐍 第0课 · 信息采集"},
-  {f:"第0课-前端-第一次让网页动起来.md",       t:"🌐 第0课 · 前端"},
-  {f:"课表对齐版-三门课怎么拧成一条线.md",     t:"🧩 课表对齐版（为什么这么排）"},
-  {f:"机房与空余-直链学习地图.md",             t:"🔗 直链学习地图（空余时间干啥）"},
-  {f:"作业提交与报错登记.md",                  t:"📮 交作业 / 报错登记"},
-  {f:"网站方案-机房取材料.md",                 t:"📡 网站方案（三层取材料）"}
+  {grp:"★ 每天先开", f:"元旦前课表-逐周逐课.md", t:"📅 元旦前课表（逐周逐课）", st:"今日"},
+  {grp:"★ 每天先开", f:"README.md", t:"🏠 总目录 · 四门课 · 一个项目", st:null},
+  {grp:"第0课 · 开机教程", f:"第0课-前端-第一次让网页动起来.md", t:"🌐 前端：第一次让网页动起来", st:null},
+  {grp:"第0课 · 开机教程", f:"第0课-信息采集-第一次抓网页.md", t:"🐍 信息采集：第一次抓网页", st:null},
+  {grp:"正式课程 · 第1~10课", f:"课程/第1课-爬真书站存CSV.md", t:"第1课 · 爬真书站存CSV", st:null},
+  {grp:"正式课程 · 第1~10课", f:"课程/第2课-翻页与DOM回显.md", t:"第2课 · 翻页与DOM回显", st:null},
+  {grp:"正式课程 · 第1~10课", f:"课程/第3课-三色按钮与fetch.md", t:"第3课 · 三色按钮与fetch", st:null},
+  {grp:"正式课程 · 第1~10课", f:"课程/第4课-SQL强化与项目建表.md", t:"第4课 · SQL强化与项目建表", st:null},
+  {grp:"正式课程 · 第1~10课", f:"课程/第5课-爬虫三件套与M1.md", t:"第5课 · 爬虫三件套", st:"M1"},
+  {grp:"正式课程 · 第1~10课", f:"课程/第6课-JS渲染表格.md", t:"第6课 · JS渲染表格", st:null},
+  {grp:"正式课程 · 第1~10课", f:"课程/第7课-落库与M2.md", t:"第7课 · 落库", st:"M2"},
+  {grp:"正式课程 · 第1~10课", f:"课程/第8课-统计与真表格.md", t:"第8课 · 统计与真表格", st:null},
+  {grp:"正式课程 · 第1~10课", f:"课程/第9课-FastAPI三接口.md", t:"第9课 · FastAPI三接口", st:"M3"},
+  {grp:"正式课程 · 第1~10课", f:"课程/第10课-复习周与期末.md", t:"第10课 · 复习周与期末", st:null},
+  {grp:"背景与方法", f:"课表对齐版-三门课怎么拧成一条线.md", t:"🧩 为什么三门课拧成一条线", st:null},
+  {grp:"背景与方法", f:"机房与空余-直链学习地图.md", t:"🔗 空余时间直链地图", st:null},
+  {grp:"工具", f:"作业提交与报错登记.md", t:"📮 交作业 / 报错登记", st:null},
+  {grp:"工具", f:"网站方案-机房取材料.md", t:"📡 网站取材料方案", st:null}
 ];
+const REPORT_URL = "https://github.com/lll-cf-666/cf4ke/issues/new?template=issue_template.md";
 const side = document.getElementById("side");
 const content = document.getElementById("content");
+const home = document.getElementById("home");
 const menuBtn = document.getElementById("menuBtn");
-FILES.forEach((x,i)=>{
-  const a = document.createElement("a");
-  a.textContent = x.t;
-  a.href = "?file=" + encodeURIComponent(x.f);
-  a.onclick = e => { e.preventDefault(); go(x.f); closeMenu(); };
-  a.dataset.f = x.f;
-  side.appendChild(a);
-});
-menuBtn.onclick = () => side.classList.toggle("open");
-function closeMenu(){ side.classList.remove("open"); }
+const tip = document.getElementById("tip");
+
+/* ---------- 首页：今天干什么 + 三张卡 ---------- */
+function renderHome(){
+  content.style.display = "none";
+  home.style.display = "block";
+  home.innerHTML = `
+  <h2 style="margin-top:4px">今天干什么</h2>
+  <div class="row">
+    <div class="card big" data-go="元旦前课表-逐周逐课.md">
+      <h3>📅 元旦前课表</h3>
+      <p>第 13 周 · 今天=第 0 课三连（13A 前端 / 13B 信息采集 / 13C 数据库）。每天先开这个，找到【第N课 · 任务卡号】再往下学。</p>
+    </div>
+    <div class="card" data-go="课程/第1课-爬真书站存CSV.md">
+      <h3>📘 正在推进 · 第 1 课</h3>
+      <p>M1（抓 10+ 院校存 CSV）截止 12/13。教学卡=任务+思路+带注释代码+逐行意思表+过关自查。</p>
+    </div>
+    <div class="card" data-go="作业提交与报错登记.md">
+      <h3>📮 卡住了 / 交作业</h3>
+      <p>报错按第 0 课的 Issue 六步登记；作业用仓库网页 Upload files，文件名带上日期。</p>
+    </div>
+  </div>
+  <h2>四种用法</h2>
+  <div class="row">
+    <div class="card" data-go="README.md"><h3>🏠 看整体规划</h3><p>四门课怎么拧成一个项目 · 一周时间盘 · 里程碑总表</p></div>
+    <div class="card" data-go="机房与空余-直链学习地图.md"><h3>🔗 空余时间学什么</h3><p>GitHub 直链地图：打开哪个文件、今天做什么、做到什么算完</p></div>
+    <div class="card" data-go="第0课-前端-第一次让网页动起来.md"><h3>🌐 从零开始</h3><p>两份第 0 课开机教程，45 分钟各一份</p></div>
+    <div class="card" data-go="网站方案-机房取材料.md"><h3>📡 换电脑怎么拿材料</h3><p>GitHub / jsDelivr / 蓝奏云三层兜底</p></div>
+  </div>
+  <p style="color:var(--dim);font-size:13px;margin-top:20px">看=免登录 · 交作业/报错=登录后操作，机房用完 Sign out · 家里更新双击 上传到网站.bat</p>`;
+  home.querySelectorAll(".card").forEach(c=>c.onclick=()=>{ go(c.dataset.go); closeMenu(); });
+}
+
+/* ---------- 侧栏渲染 ---------- */
+function buildSide(){
+  let lastGrp = null;
+  FILES.forEach(x=>{
+    if (x.grp !== lastGrp){
+      const g = document.createElement("div");
+      g.className = "grp"; g.textContent = x.grp;
+      side.appendChild(g); lastGrp = x.grp;
+    }
+    const a = document.createElement("a");
+    a.textContent = x.t;
+    a.href = "?file=" + encodeURIComponent(x.f);
+    a.dataset.f = x.f;
+    if (x.st){ a.classList.add("st"); a.dataset.st = x.st; }
+    a.onclick = e => { e.preventDefault(); go(x.f); closeMenu(); };
+    side.appendChild(a);
+  });
+}
+
+/* ---------- 加载与渲染 ---------- */
 function esc(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
 function render(md){
+  home.style.display = "none";
+  content.style.display = "block";
   if (window.marked && marked.parse) {
     content.innerHTML = marked.parse(md);
   } else {
@@ -101,6 +173,7 @@ function render(md){
 async function go(file){
   history.replaceState(null,"","?file=" + encodeURIComponent(file));
   side.querySelectorAll("a").forEach(a=>a.classList.toggle("on", a.dataset.f===file));
+  updateTopbar(file);
   content.innerHTML = "<p>加载中…</p>";
   try{
     const res = await fetch(encodeURI(file), {cache:"no-cache"});
@@ -111,9 +184,24 @@ async function go(file){
       "<br>开 <a target='_blank' href='https://github.com/lll-cf-666/cf4ke/blob/main/" + encodeURIComponent(file) + "'>GitHub 上的原文</a> 看，或者按第0课的流程去 Issues 报。</p>";
   }
 }
+
+/* ---------- 上一课/下一课 ---------- */
+function updateTopbar(file){
+  const i = FILES.findIndex(x=>x.f===file);
+  const prev = document.getElementById("prevB");
+  const next = document.getElementById("nextB");
+  prev.style.visibility = i>0 ? "visible" : "hidden";
+  next.style.visibility = i>=0 && i<FILES.length-1 ? "visible" : "hidden";
+  if(i>0) prev.onclick = e=>{e.preventDefault(); go(FILES[i-1].f);};
+  if(i<FILES.length-1) next.onclick = e=>{e.preventDefault(); go(FILES[i+1].f);};
+}
+
+/* ---------- 路由 ---------- */
 const q = new URLSearchParams(location.search).get("file");
-const first = FILES.find(x=>x.f===q) ? q : FILES[0].f;
-go(first);
+buildSide();
+menuBtn.onclick = () => side.classList.toggle("open");
+function closeMenu(){ side.classList.remove("open"); }
+if (q && FILES.find(x=>x.f===q)) { go(q); } else { renderHome(); }
 </script>
 </body>
 </html>
