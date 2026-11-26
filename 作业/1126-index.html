@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第0课练手 · 点击计数器</title>
+</head>
+<body>
+    <h1 id="count">0</h1>
+    <button id="btn">点击+1</button>
+    <button id="btn2">点击 -1</button>
+</body>
+<script>
+    let n = 0;
+    const h1 = document.querySelector('#count');
+    const btn = document.querySelector('#btn');
+    const btn2 = document.querySelector('#btn2')
+    
+    
+    function show(){
+        h1.textContent = n;
+        if(n<0){
+            h1.style.color = 'red';
+        }
+        else{
+            h1.style.color = 'black';
+        }
+        btn.textContent = `点击 +1(已点击${n}次)`;
+    }
+    btn.addEventListener('click',function(){
+        n = n + 1;
+        show();
+    });
+    btn2.addEventListener('click',function(){
+        n = n - 1;
+        show();
+    });
+    
+</script>
+</html>
